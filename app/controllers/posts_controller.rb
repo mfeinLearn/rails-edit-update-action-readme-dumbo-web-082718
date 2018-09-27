@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    # byebug
     @post = Post.find(params[:id])
   end
 
@@ -20,4 +21,17 @@ class PostsController < ApplicationController
   end
 
   # add edit and update methods here
+  def edit
+    # Now that the edit view template
+    # will have access to the Post object
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    # raise params.inspect
+    @post = Post.find(params[:id])
+    @post.update(title: params[:title], description: params[:description])
+    redirect_to post_path(@post)
+    @post.save
+  end
 end
